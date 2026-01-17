@@ -1,0 +1,7 @@
+{
+  "name": "AgroFinder Pro",
+  "description": "Profesjonalne narzędzie do wyszukiwania dostawców maszyn rolniczych z wykorzystaniem AI i Google Maps.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
