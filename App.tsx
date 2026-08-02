@@ -7,6 +7,7 @@ import BusinessTable from './components/BusinessTable';
 type LocationHierarchy = Record<string, Record<string, string[]>>;
 
 const LOCATION_DATA: LocationHierarchy = {
+  // ... (keeping existing LOCATION_DATA)
   "Polska": {
     "Dolnośląskie": ["Wrocław", "Jelenia Góra", "Legnica", "Wałbrzych", "bolesławiecki", "dzierżoniowski", "głogowski", "górowski", "jaworski", "kamiennogórski", "kłodzki", "legnicki", "lubański", "lubiński", "lwówecki", "milicki", "oleśnicki", "oławski", "polkowicki", "strzeliński", "średzki", "świdnicki", "trzebnicki", "wałbrzyski", "wołowski", "wrocławski", "ząbkowicki", "zgorzelecki", "złotoryjski"],
     "Kujawsko-Pomorskie": ["Bydgoszcz", "Toruń", "Włocławek", "Grudziądz", "aleksandrowski", "brodnicki", "bydgoski", "chełmiński", "golubsko-dobrzyński", "grudziądzki", "inowrocławski", "lipnowski", "mogileński", "nakielski", "radziejowski", "rypiński", "sępoleński", "świecki", "toruński", "tucholski", "wąbrzeski", "włocławski", "żniński"],
@@ -57,7 +58,7 @@ const LOCATION_DATA: LocationHierarchy = {
     "Kauno": ["Kaunas miestas", "Kauno rajonas", "Birštonas", "Jonava", "Kaišiadorys", "Kėdainiai", "Prienai", "Raseiniai"],
     "Klaipėdos": ["Klaipėda miestas", "Klaipėdos rajonas", "Neringa", "Palanga", "Skuodas", "Šilutė", "Kretinga"],
     "Marijampolės": ["Marijampolė", "Vilkaviškis", "Kalvarija", "Kazlų Rūda", "Šakiai"],
-    "Panevėžio": ["Panevėžys miestas", "Panevėžio rajonas", "Biržai", "Kupiškis", "Pasvalys", "Rokiškis"],
+    "Panevėžio": ["Panevėżys miestas", "Panevėžio rajonas", "Biržai", "Kupiškis", "Pasvalys", "Rokiškis"],
     "Šiaulių": ["Šiauliai miestas", "Šiaulių rajonas", "Akmenė", "Joniškis", "Kelmė", "Pakruojis", "Radviliškis"],
     "Tauragės": ["Tauragė", "Jurbarkas", "Pagęgiai", "Šilalė"],
     "Telšių": ["Telšiai", "Mażeikiai", "Plungę", "Rietavas"],
@@ -115,13 +116,13 @@ const LOCATION_DATA: LocationHierarchy = {
     "Karlovarský kraj": ["Cheb", "Karlovy Vary", "Sokolov"],
     "Ústecký kraj": ["Děčín", "Chomutov", "Litoměřice", "Louny", "Most", "Teplice", "Ústí nad Labem"],
     "Liberecký kraj": ["Česká Lípa", "Jablonec nad Nisou", "Liberec", "Semily"],
-    "Královéhradecký kraj": ["Hradec Králové", "Jičín", "Náchod", "Rychnov nad Kněžnou", "Trutnov"],
+    "Královéhradecký kraj": ["Hradec Králové", "Jičín", "Náchod", "Rychnov nad Knężnou", "Trutnov"],
     "Pardubický kraj": ["Chrudim", "Pardubice", "Svitavy", "Ústí nad Orlicí"],
     "Kraj Vysočina": ["Havlíčkův Brod", "Jihlava", "Pelhřimov", "Třebíč", "Žďár nad Sázavou"],
     "Jihomoravský kraj": ["Blansko", "Brno-město", "Brno-venkov", "Břeclav", "Hodonín", "Vyškov", "Znojmo"],
     "Olomoucký kraj": ["Jeseník", "Olomouc", "Prostějov", "Přerov", "Šumperk"],
     "Moravskoslezský kraj": ["Bruntál", "Frýdek-Místek", "Karviná", "Nový Jičín", "Opava", "Ostrava-město"],
-    "Zlínský kraj": ["Kroměříž", "Uherské Hradiště", "Vsetín", "Zlín"]
+    "Zlínský kraj": ["Kroměříż", "Uherské Hradiště", "Vsetín", "Zlín"]
   },
   "Słowacja": {
     "Bratislavský kraj": ["Bratislava I-V", "Malacky", "Pezinok", "Senec"],
@@ -310,7 +311,7 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 py-12 px-4 sm:px-6 lg:px-8 font-sans">
+    <div className="min-h-screen bg-slate-50 py-12 px-4 sm:px-6 lg:grid-cols-8 font-sans">
       <div className="max-w-7xl mx-auto">
         <header className="text-center mb-10">
           <div className="inline-block p-4 bg-emerald-100 rounded-3xl mb-4 shadow-sm">
@@ -320,7 +321,7 @@ const App: React.FC = () => {
             Agro-Lead MultiFinder
           </h1>
           <p className="text-slate-500 font-medium text-lg">
-            Grupowe pozyskiwanie baz danych z wielu obszarów (Zoptymalizowane Filtrowanie)
+            Grupowe pozyskiwanie baz danych z wielu obszarów (Zoptymalizowane Filtrowanie AI)
           </p>
         </header>
 
@@ -429,7 +430,7 @@ const App: React.FC = () => {
             ) : (
               <>
                 <i className="fas fa-search-location text-emerald-400"></i>
-                Uruchom analizę rynkową
+                Uruchom analizę Google Maps AI
               </>
             )}
           </button>
@@ -493,15 +494,15 @@ const App: React.FC = () => {
               </div>
             </div>
             <div className="space-y-2">
-              <h2 className="text-2xl font-black text-slate-800">Przeszukiwanie rynków zagranicznych...</h2>
-              <p className="text-slate-400 font-medium italic">Wybrana fraza: "{translatedQuery}"</p>
+              <h2 className="text-2xl font-black text-slate-800">Przeszukiwanie rynków Google Maps...</h2>
+              <p className="text-slate-400 font-medium italic">Weryfikacja rynkowa: "{translatedQuery}"</p>
               <div className="flex items-center justify-center gap-2 mt-4">
                 <div className="flex gap-1">
                   <div className="w-2 h-2 bg-emerald-500 rounded-full animate-bounce [animation-delay:-0.3s]"></div>
                   <div className="w-2 h-2 bg-emerald-500 rounded-full animate-bounce [animation-delay:-0.15s]"></div>
                   <div className="w-2 h-2 bg-emerald-500 rounded-full animate-bounce"></div>
                 </div>
-                <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Analiza Map Google i Wyszukiwarki</span>
+                <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Aktywna Optymalizacja Google Maps & Search</span>
               </div>
             </div>
           </div>

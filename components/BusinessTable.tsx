@@ -30,7 +30,7 @@ const BusinessTable: React.FC<BusinessTableProps> = ({ businesses }) => {
     const link = document.createElement("a");
     const url = URL.createObjectURL(blob);
     link.setAttribute("href", url);
-    link.setAttribute("download", `baza_firm_${new Date().toISOString().split('T')[0]}.csv`);
+    link.setAttribute("download", `agro_leads_${new Date().toISOString().split('T')[0]}.csv`);
     link.style.visibility = 'hidden';
     document.body.appendChild(link);
     link.click();
@@ -43,8 +43,8 @@ const BusinessTable: React.FC<BusinessTableProps> = ({ businesses }) => {
     <div className="mt-8 bg-white rounded-3xl shadow-2xl overflow-hidden border border-slate-200 animate-slide-up">
       <div className="p-6 bg-slate-50 border-b border-slate-200 flex flex-col md:flex-row justify-between items-center gap-4">
         <div>
-          <h3 className="text-2xl font-black text-slate-800 tracking-tight">Wyniki Wyszukiwania</h3>
-          <p className="text-sm text-slate-500 font-medium tracking-wide">Znaleziono {businesses.length} rekordów spełniających kryteria</p>
+          <h3 className="text-2xl font-black text-slate-800 tracking-tight">Wyniki Analizy AI (Google Maps)</h3>
+          <p className="text-sm text-slate-500 font-medium tracking-wide">Pozyskano {businesses.length} zweryfikowanych leadów</p>
         </div>
         <button 
           onClick={exportToCSV}
@@ -63,7 +63,7 @@ const BusinessTable: React.FC<BusinessTableProps> = ({ businesses }) => {
               <th className="px-6 py-5 font-black">Witryna WWW</th>
               <th className="px-6 py-5 font-black">Potencjał</th>
               <th className="px-6 py-5 font-black">Kontakt</th>
-              <th className="px-6 py-5 font-black">Opinie Google</th>
+              <th className="px-6 py-5 font-black">Ranking Google</th>
               <th className="px-6 py-5 font-black">Adres</th>
               <th className="px-6 py-5 font-black text-center">Mapy</th>
             </tr>
@@ -84,14 +84,11 @@ const BusinessTable: React.FC<BusinessTableProps> = ({ businesses }) => {
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-2 px-3 py-1.5 bg-blue-50 text-blue-600 rounded-lg text-xs font-bold hover:bg-blue-600 hover:text-white transition-all group/btn"
                     >
-                      <i className="fas fa-external-link-alt text-[10px] group-hover/btn:scale-110 transition-transform"></i>
+                      <i className="fas fa-external-link-alt text-[10px]"></i>
                       <span className="max-w-[150px] truncate">{business.website.replace(/^https?:\/\/(www\.)?/, '')}</span>
                     </a>
                   ) : (
-                    <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-slate-100 text-slate-400 rounded-lg text-[10px] font-black uppercase tracking-widest">
-                      <i className="fas fa-search"></i>
-                      Sprawdź ręcznie
-                    </span>
+                    <span className="text-slate-300 text-[10px] font-black uppercase">Brak strony</span>
                   )}
                 </td>
                 <td className="px-6 py-5">
@@ -117,9 +114,6 @@ const BusinessTable: React.FC<BusinessTableProps> = ({ businesses }) => {
                         {business.email}
                       </div>
                     )}
-                    {!business.phone && !business.email && (
-                      <span className="text-slate-300 text-[10px] font-medium uppercase italic">Brak danych</span>
-                    )}
                   </div>
                 </td>
                 <td className="px-6 py-5">
@@ -130,17 +124,16 @@ const BusinessTable: React.FC<BusinessTableProps> = ({ businesses }) => {
                           <i key={i} className={`${i < Math.floor(business.rating || 0) ? 'fas' : 'far'} fa-star`}></i>
                         ))}
                       </div>
-                      <span className="text-sm font-black text-slate-700">{business.rating || '0.0'}</span>
+                      <span className="text-sm font-black text-slate-700">{business.rating?.toFixed(1) || '0.0'}</span>
                     </div>
-                    <span className="text-[10px] font-bold text-slate-400 uppercase tracking-tighter">
+                    <span className="text-[10px] font-bold text-slate-400 uppercase">
                       {business.reviewsCount || 0} opinii
                     </span>
                   </div>
                 </td>
                 <td className="px-6 py-5">
-                  <div className="flex items-start gap-2 text-xs text-slate-500 max-w-[200px] leading-relaxed">
-                    <i className="fas fa-map-marker-alt text-slate-300 mt-0.5"></i>
-                    {business.address || "Nie podano"}
+                  <div className="text-xs text-slate-500 max-w-[200px] leading-relaxed">
+                    {business.address}
                   </div>
                 </td>
                 <td className="px-6 py-5 text-center">
@@ -149,15 +142,12 @@ const BusinessTable: React.FC<BusinessTableProps> = ({ businesses }) => {
                       href={business.mapsUri} 
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center w-10 h-10 bg-slate-900 text-white rounded-xl hover:bg-emerald-600 transition-all transform hover:scale-110 shadow-md"
-                      title="Zobacz w Mapach"
+                      className="inline-flex items-center justify-center w-10 h-10 bg-slate-900 text-white rounded-xl hover:bg-emerald-600 transition-all shadow-md"
                     >
                       <i className="fas fa-map-location-dot"></i>
                     </a>
                   ) : (
-                    <div className="w-10 h-10 border-2 border-slate-100 rounded-xl mx-auto flex items-center justify-center text-slate-200">
-                      <i className="fas fa-minus"></i>
-                    </div>
+                    <div className="text-slate-200"><i className="fas fa-minus"></i></div>
                   )}
                 </td>
               </tr>
@@ -169,11 +159,11 @@ const BusinessTable: React.FC<BusinessTableProps> = ({ businesses }) => {
         <div className="flex items-center gap-2">
           <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div>
           <span className="text-[9px] font-black text-slate-400 uppercase tracking-[0.2em]">
-            Optymalizacja LEAD-Quality: Aktywna
+            Źródło: Google Maps & Search (AI Verified)
           </span>
         </div>
         <div className="text-[9px] font-bold text-slate-300 uppercase tracking-widest">
-          AgroFinder AI v3.0 | Multi-Region
+          AgroFinder v4.0 | Professional Edition
         </div>
       </div>
     </div>
